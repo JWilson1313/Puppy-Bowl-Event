@@ -1,3 +1,5 @@
+import { useGetPuppiesQuery } from "./puppySlice";
+
 /**
  * @component
  * Shows a list of puppies in the roster.
@@ -5,6 +7,15 @@
  */
 export default function PuppyList({ setSelectedPuppyId }) {
   // TODO: Get data from getPuppies query
+  const { data: puppies, isLoading, error } = useGetPuppiesQuery();
+
+  if (isLoading) {
+    return <p>Loading.....</p>;
+  }
+
+  if (error) {
+    return <p>There was an error: {error.message}</p>;
+  }
 
   return (
     <article>
